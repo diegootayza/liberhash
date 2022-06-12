@@ -7,6 +7,11 @@ services:
         restart: always
         ports:
             - '4000:4000'
-
-volumes:
-    react_data:
+        deploy:
+        resources:
+            limits:
+                cpus: '0.90'
+                memory: 768M
+            reservations:
+                cpus: '0.50'
+                memory: 256M
