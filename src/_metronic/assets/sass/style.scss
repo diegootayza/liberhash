@@ -1,0 +1,29 @@
+//
+// Theme style
+//
+
+// Mode
+$mode: default;
+
+// Initialize
+@import 'init';
+
+// Components
+@import './core/components/components';
+@import 'components/components';
+
+// Layout
+@import 'layout/layout';
+@import './core/layout/docs/layout';
+
+.alert alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
