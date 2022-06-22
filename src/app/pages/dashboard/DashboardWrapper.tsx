@@ -34,7 +34,7 @@ type order = {
     related_order: order
 }
 
-const DashboardPage: FC = () => {
+const DashboardPage = () => {
     const user: UserModel = useSelector<RootState>(({ auth }) => auth.user, shallowEqual) as UserModel
     let cryp_id = 'account[]=' + user.cryp_id?.toString()
     const [statsData, setStatsData] = useState({})
@@ -242,4 +242,4 @@ const DashboardWrapper: FC = () => {
     )
 }
 
-export { DashboardWrapper }
+export default DashboardWrapper

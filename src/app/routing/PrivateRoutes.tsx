@@ -1,20 +1,21 @@
-import { lazy } from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import { MasterLayout } from '../../_metronic/layout/MasterLayout'
-import { DashboardWrapper } from '../pages/dashboard/DashboardWrapper'
+import DashboardWrapper from '../pages/dashboard/DashboardWrapper'
 import { MenuTestPage } from '../pages/MenuTestPage'
 import { shallowEqual, useSelector } from 'react-redux'
 import { RootState } from '../../setup'
 
+import MyAccountPageWrapper from '../pages/myaccount/MyAccountPageWrapper'
+import WalletPageWrapper from '../pages/wallet/WalletPageWrapper'
+import BinanceAccountPageWrapper from '../pages/binanceaccount/BinanceAccountPageWrapper'
+import ReferralAccountPageWrapper from '../pages/referral/ReferralAccountPageWrapper'
+import ProfilePageWrapper from '../pages/profile/ProfilePageWrapper'
+import SecurityPageWrapper from '../pages/security/SecurityPageWrapper'
+import TokenRegisterWrapper from '../pages/tokenRegister/TokenRegisterWrapper'
+
 const PrivateRoutes = () => {
-    const MyAccountPageWrapper = lazy(() => import('../pages/myaccount/MyAccountPageWrapper'))
-    const WalletPageWrapper = lazy(() => import('../pages/wallet/WalletPageWrapper'))
-    const BinanceAccountPageWrapper = lazy(() => import('../pages/binanceaccount/BinanceAccountPageWrapper'))
-    const ReferralAccountPageWrapper = lazy(() => import('../pages/referral/ReferralAccountPageWrapper'))
-    const ProfilePageWrapper = lazy(() => import('../pages/profile/ProfilePageWrapper'))
-    const SecurityPageWrapper = lazy(() => import('../pages/security/SecurityPageWrapper'))
-    const TokenRegisterWrapper = lazy(() => import('../pages/tokenRegister/TokenRegisterWrapper'))
     const cryp_id = useSelector<RootState>(({ auth }) => auth!.user!.cryp_id, shallowEqual)
+
     return (
         <Routes>
             <Route element={<MasterLayout />}>

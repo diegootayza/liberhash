@@ -1,0 +1,22 @@
+.headerWrapper {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 265px;
+    height: 64px;
+    width: calc(100% - 265px);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1e1e2d;
+}
+
+@media (max-width: 992px) {
+    .headerWrapper {
+        left: 0;
+        height: 54px;
+        width: 100%;
+    }
+}

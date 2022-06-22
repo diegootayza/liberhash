@@ -20,6 +20,6 @@ app.use('/api/users', require('./controllers/users.controller'))
 
 app.use(errorHandler)
 
-app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../build', 'index.html')))
+app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html')))
 
 app.listen(4000, () => console.log('Server is running... http://localhost:4000'))

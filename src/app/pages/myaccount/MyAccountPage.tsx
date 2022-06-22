@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { KTSVG } from '../../../_metronic/helpers'
 import { _post, _get, _put, _delete, _patch } from '../../api/index'
 
@@ -29,10 +29,10 @@ type balances = {
 
 const strategies = ['Divide & Conquer', 'Ride The Trend', 'Surfing The Risk', 'To The Moon']
 
-const MyAccountPage: React.FC = () => {
+const MyAccountPage = () => {
     const [accounts, setAccounts] = useState([])
     const [algos, setAlgos] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const [update, setUpdate] = useState(false)
     const [loadingAccount, setLoadingAccount] = useState(false)
     const [error, setError] = useState(null)
@@ -99,16 +99,21 @@ const MyAccountPage: React.FC = () => {
     }
 
     const handleEdit = (acc: any) => {
-        console.log(acc)
         setUpdate(true)
         setAccount(acc)
     }
     const handleBalance = async (acc: any) => {
-        console.log(acc)
         setIsLoadingBalance(true)
         let balances: any = await _get('/users/balance/' + acc.cryp_id)
-        setBalances(balances.data)
-        setBalancesArray(balances.data.balances)
+
+        if (balances.data) {
+            setBalances(balances.data)
+            setBalancesArray(balances.data.balances)
+        } else {
+            setBalances({} as balances)
+            setBalancesArray([])
+        }
+
         setIsLoadingBalance(false)
     }
 
@@ -337,46 +342,54 @@ const MyAccountPage: React.FC = () => {
                                     <div className="modal-body">
                                         {isLoadingBalance ? (
                                             <>
-                                                <span className="spinner-border spinner-border-sm align-middle ms-12"></span>
+                                                <span className="spinner-border spinner-border-sm align-middle ms-12" />
                                             </>
                                         ) : (
                                             <>
-                                                <table className="table table-row-dashed table-row-gray-300 gy-7">
-                                                    <thead>
-                                                        <tr className="fw-bolder fs-6 text-gray-800">
-                                                            <th>Coin</th>
-                                                            <th>Available</th>
-                                                            <th>USD Value</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {balancesArray.map((balance: balance) => (
-                                                            <tr key={balance.coin}>
-                                                                <td>{balance.coin}</td>
-                                                                <td>{balance.available}</td>
-                                                                <td>{balance.usd}</td>
-                                                            </tr>
-                                                        ))}
-                                                        <tr>
-                                                            <td>
-                                                                <b>USDT</b>
-                                                            </td>
-                                                            <td>
-                                                                <b>{balances.usdt_available}</b>
-                                                            </td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <b>Total</b>
-                                                            </td>
-                                                            <td>
-                                                                <b>{balances.usdt_total}</b>
-                                                            </td>
-                                                            <td></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                {balancesArray.length > 0 ? (
+                                                    <>
+                                                        <table className="table table-row-dashed table-row-gray-300 gy-7">
+                                                            <thead>
+                                                                <tr className="fw-bolder fs-6 text-gray-800">
+                                                                    <th>Coin</th>
+                                                                    <th>Available</th>
+                                                                    <th>USD Value</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {balancesArray.map((balance: balance) => (
+                                                                    <tr key={balance.coin}>
+                                                                        <td>{balance.coin}</td>
+                                                                        <td>{balance.available}</td>
+                                                                        <td>{balance.usd}</td>
+                                                                    </tr>
+                                                                ))}
+                                                                <tr>
+                                                                    <td>
+                                                                        <b>USDT</b>
+                                                                    </td>
+                                                                    <td>
+                                                                        <b>{balances.usdt_available}</b>
+                                                                    </td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <b>Total</b>
+                                                                    </td>
+                                                                    <td>
+                                                                        <b>{balances.usdt_total}</b>
+                                                                    </td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <span>No balance data :(</span>
+                                                    </>
+                                                )}
                                             </>
                                         )}
                                     </div>
