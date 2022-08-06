@@ -27,7 +27,7 @@ type balances = {
     usdt_total: string
 }
 
-const strategies = ['Divide & Conquer', 'Ride The Trend', 'Surfing The Risk', 'To The Moon']
+const strategies = ['Smart Conquer', 'Smart Trend', 'Smart Risk', 'Smartrix']
 
 const MyAccountPage = () => {
     const [accounts, setAccounts] = useState([])
